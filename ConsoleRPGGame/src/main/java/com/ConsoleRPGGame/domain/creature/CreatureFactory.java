@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 public class CreatureFactory {
 
   public Player createPlayer (String name){
-    return new Player (name, 100, 100, 15, 5);
+    return new Player (name, 100, 100, 20, 10);
 
   }
 
