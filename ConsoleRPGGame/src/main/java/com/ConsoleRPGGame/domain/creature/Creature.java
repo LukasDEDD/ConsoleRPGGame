@@ -39,7 +39,7 @@ public abstract class Creature {
   }
 
   public void setHealthPoints(int healthPoints) {
-    this.healthPoints = healthPoints;
+    this.healthPoints = Math.max(0, healthPoints);
   }
 
   public int getMaxHealthPoints() {
@@ -64,5 +64,8 @@ public abstract class Creature {
 
   public void setDefense(int defense) {
     this.defense = defense;
+
+
+
   }
 }
