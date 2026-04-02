@@ -11,16 +11,13 @@ public class Enemy extends Creature {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  private String type;
   private int experienceReward = 20;
 
   public Enemy() {
   }
 
-  public Enemy(String name, int healthPoints, int maxHealthPoints, int strength, int defense, String type, int experienceReward) {
+  public Enemy(String name, int healthPoints, int maxHealthPoints, int strength, int defense, int experienceReward) {
     super(name, healthPoints, maxHealthPoints, strength, defense);
-
-    this.type = type;
 
   }
 
@@ -38,13 +35,5 @@ public class Enemy extends Creature {
 
   public void setExperienceReward(int experienceReward) {
     this.experienceReward = experienceReward;
-  }
-
-  public String getType() {
-    return type;
-  }
-
-  public void setType(String type) {
-    this.type = type;
   }
 }
