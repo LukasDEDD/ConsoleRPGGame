@@ -12,17 +12,27 @@ public class Item {
   private Long id;
 
   private String name;
-  private String type;
+
+  @Enumerated(EnumType.STRING)
+  private ItemType type;
   private int power;
 
   public Item() {
   }
 
-  public Item(Long id, String name, String type, int power) {
-    this.id = id;
-    this.name = name;
-    this.type = type;
+  public Item(int power, ItemType type, String name, Long id) {
     this.power = power;
+    this.type = type;
+    this.name = name;
+    this.id = id;
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
   }
 
   public int getPower() {
@@ -33,11 +43,11 @@ public class Item {
     this.power = power;
   }
 
-  public String getType() {
+  public ItemType getType() {
     return type;
   }
 
-  public void setType(String type) {
+  public void setType(ItemType type) {
     this.type = type;
   }
 
@@ -48,12 +58,5 @@ public class Item {
   public void setName(String name) {
     this.name = name;
   }
-
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
 }
+
