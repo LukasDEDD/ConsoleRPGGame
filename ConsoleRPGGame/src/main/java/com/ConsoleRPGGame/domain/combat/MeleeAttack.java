@@ -1,4 +1,6 @@
 package com.ConsoleRPGGame.domain.combat;
 
-public class MeleeAttack {
+public interface MeleeAttack {
+
+
 }

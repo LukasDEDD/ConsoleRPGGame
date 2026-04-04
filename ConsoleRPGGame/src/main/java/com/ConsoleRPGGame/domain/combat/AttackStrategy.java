@@ -1,4 +1,7 @@
 package com.ConsoleRPGGame.domain.combat;
 
-public class AttackStrategy {
+import com.ConsoleRPGGame.domain.creature.Creature;
+
+public interface AttackStrategy {
+  int calculateDamage(Creature attacker, Creature defender);
 }
