@@ -1,6 +1,7 @@
 package com.ConsoleRPGGame.domain.creature;
 
 
+import com.ConsoleRPGGame.domain.combat.AttackStrategy;
 import jakarta.persistence.*;
 
 @Entity
@@ -11,14 +12,15 @@ public class Enemy extends Creature {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  private int experienceReward = 20;
+  private int experience;
 
   public Enemy() {
+
   }
 
-  public Enemy(String name, int healthPoints, int maxHealthPoints, int strength, int defense, int experienceReward) {
-    super(name, healthPoints, maxHealthPoints, strength, defense);
-
+  public Enemy(String name, int healthPoints, int maxHealthPoints, int strength, int defense, AttackStrategy attackStrategy, int experience) {
+    super(name, healthPoints, maxHealthPoints, strength, defense, attackStrategy);
+    this.experience = experience;
   }
 
   public Long getId() {
@@ -29,11 +31,12 @@ public class Enemy extends Creature {
     this.id = id;
   }
 
-  public int getExperienceReward() {
-    return experienceReward;
+  public int getExperience() {
+    return experience;
   }
 
-  public void setExperienceReward(int experienceReward) {
-    this.experienceReward = experienceReward;
+  public void setExperience(int experience) {
+    this.experience = experience;
   }
 }
+

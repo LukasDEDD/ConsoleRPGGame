@@ -34,18 +34,18 @@ public class Player extends Creature {
   @JoinColumn(name = "equipItem_id")
   private Item equipItem;
 
-  private AttackStrategy attackStrategy;
+  public Player() {
 
+  }
 
-  public Player(String name, int healthPoints, int maxHealthPoints, int strength, int defense, AttackStrategy attackStrategy, Item equipItem, Item equippedWeapon, List<Item> inventory, int gold, int level, int experience) {
-    super(name, healthPoints, maxHealthPoints, strength, defense);
-    this.attackStrategy = attackStrategy;
-    this.equipItem = equipItem;
-    this.equippedWeapon = equippedWeapon;
+  public Player(String name, int healthPoints, int maxHealthPoints, int strength, int defense, AttackStrategy attackStrategy, int experience, int level, List<Item> inventory, int gold, Item equippedWeapon, Item equipItem) {
+    super(name, healthPoints, maxHealthPoints, strength, defense, attackStrategy);
+    this.experience = experience;
+    this.level = level;
     this.inventory = inventory;
     this.gold = gold;
-    this.level = level;
-    this.experience = experience;
+    this.equippedWeapon = equippedWeapon;
+    this.equipItem = equipItem;
   }
 
   public Long getId() {
@@ -104,11 +104,4 @@ public class Player extends Creature {
     this.equipItem = equipItem;
   }
 
-  public AttackStrategy getAttackStrategy() {
-    return attackStrategy;
-  }
-
-  public void setAttackStrategy(AttackStrategy attackStrategy) {
-    this.attackStrategy = attackStrategy;
-  }
 }

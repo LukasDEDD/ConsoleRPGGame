@@ -1,7 +1,9 @@
 package com.ConsoleRPGGame.domain.creature;
 
+import com.ConsoleRPGGame.domain.combat.AttackStrategy;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.Column;
+import jakarta.persistence.Transient;
 
 @MappedSuperclass
 public abstract class Creature {
@@ -15,15 +17,19 @@ public abstract class Creature {
   private int strength;
   private int defense;
 
+  @Transient
+  private AttackStrategy attackStrategy;
+
   public Creature() {
   }
 
-  public Creature(String name, int healthPoints, int maxHealthPoints, int strength, int defense) {
+  public Creature(String name, int healthPoints, int maxHealthPoints, int strength, int defense, AttackStrategy attackStrategy) {
     this.name = name;
     this.healthPoints = healthPoints;
     this.maxHealthPoints = maxHealthPoints;
     this.strength = strength;
     this.defense = defense;
+    this.attackStrategy = attackStrategy;
   }
 
   public String getName() {
@@ -62,10 +68,16 @@ public abstract class Creature {
     return defense;
   }
 
+  public AttackStrategy getAttackStrategy() {
+    return attackStrategy;
+  }
+
+  public void setAttackStrategy(AttackStrategy attackStrategy) {
+    this.attackStrategy = attackStrategy;
+  }
+
   public void setDefense(int defense) {
     this.defense = defense;
-
-
 
   }
 }
