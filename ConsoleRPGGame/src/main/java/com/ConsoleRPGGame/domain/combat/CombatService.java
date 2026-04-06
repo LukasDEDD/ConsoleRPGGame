@@ -15,9 +15,18 @@ public class CombatService {
   public CombatService(PlayerRepository playerRepository, EnemyRepository enemyRepository) {
     this.playerRepository = playerRepository;
     this.enemyRepository = enemyRepository;
+   }
+
+
+
   }
+// public startCombat(Player player, Creature creature){
+
+// private executeAttack(Creature attacker, Creature defender){
+
+//public resolveCombatVictory(Player player, Creature creature){
 
 
 
 
-}
+

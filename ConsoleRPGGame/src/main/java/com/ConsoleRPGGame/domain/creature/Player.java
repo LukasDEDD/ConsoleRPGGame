@@ -1,6 +1,7 @@
 package com.ConsoleRPGGame.domain.creature;
 
 
+import com.ConsoleRPGGame.domain.combat.AttackStrategy;
 import com.ConsoleRPGGame.domain.item.Item;
 import jakarta.persistence.*;
 
@@ -33,20 +34,19 @@ public class Player extends Creature {
   @JoinColumn(name = "equipItem_id")
   private Item equipItem;
 
+  private AttackStrategy attackStrategy;
 
-  public Player() {
-  }
 
-  public Player(String name, int healthPoints, int maxHealthPoints, int strength, int defense, int level, Item equippedWeapon, Item equipItem, List<Item> inventory, int experience, int gold) {
+  public Player(String name, int healthPoints, int maxHealthPoints, int strength, int defense, AttackStrategy attackStrategy, Item equipItem, Item equippedWeapon, List<Item> inventory, int gold, int level, int experience) {
     super(name, healthPoints, maxHealthPoints, strength, defense);
-    this.level = level;
-    this.equippedWeapon = equippedWeapon;
+    this.attackStrategy = attackStrategy;
     this.equipItem = equipItem;
+    this.equippedWeapon = equippedWeapon;
     this.inventory = inventory;
-    this.experience = experience;
     this.gold = gold;
+    this.level = level;
+    this.experience = experience;
   }
-
 
   public Long getId() {
     return id;
@@ -102,5 +102,13 @@ public class Player extends Creature {
 
   public void setEquipItem(Item equipItem) {
     this.equipItem = equipItem;
+  }
+
+  public AttackStrategy getAttackStrategy() {
+    return attackStrategy;
+  }
+
+  public void setAttackStrategy(AttackStrategy attackStrategy) {
+    this.attackStrategy = attackStrategy;
   }
 }

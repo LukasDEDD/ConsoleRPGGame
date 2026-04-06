@@ -30,13 +30,13 @@ public class InventoryService {
   }
 
 
-  private void equipWeapon(Player player, Item weapon) {
+  public void equipWeapon(Player player, Item weapon) {
 
       player.setEquippedWeapon(weapon);
       System.out.println("You have deployed: " + weapon.getName());
     }
 
-  private void equipItem(Player player, Item weapon) {
+  public void equipItem(Player player, Item weapon) {
     player.setEquippedWeapon(weapon);
     System.out.println("You have deployed: " + weapon.getName());
   }
@@ -48,12 +48,12 @@ public class InventoryService {
    // Políčko tam zůstane, ale je "vynulované" (prázdné). Neříkáš "smaž tu ruku", ale "dej z té ruky pryč ten meč
 
 
-  private void unequipWeapon(Player player) {
+  public void unequipWeapon(Player player) {
     player.setEquippedWeapon(null);
     System.out.println("Weapon removed.");
   }
 
-  private void unequipItem(Player player) {
+  public void unequipItem(Player player) {
     player.setEquippedWeapon(null);
     System.out.println("Weapon removed.");
   }
