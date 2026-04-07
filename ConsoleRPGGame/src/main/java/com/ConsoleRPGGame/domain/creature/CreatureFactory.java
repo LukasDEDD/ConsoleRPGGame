@@ -9,8 +9,6 @@ import java.util.ArrayList;
 public class CreatureFactory {
 
 
-
-
   public Player createPlayer (String name){
     return new Player (name, 100, 100,20, 10, null, 0,1,new ArrayList<>(),10,null, null);
 
@@ -27,4 +25,10 @@ public class CreatureFactory {
     return new Enemy("Furious Orc", 70, 70, 18, 6, null,10);
   }
 
+  public Enemy createEnemy(String type) {
+    return switch (type.toUpperCase()) {
+      case "ORC" -> createOrc();
+      default -> createCreature(); // vrátí Goblina
+    };
+  }
 }
