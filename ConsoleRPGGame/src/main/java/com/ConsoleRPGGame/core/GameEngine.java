@@ -24,7 +24,7 @@ public class GameEngine {
   }
 
   public void start() {
-    // Inicializace hráče (vytvoříme ho přes factory)
+
     if (gameState.getActivePlayer() == null) {
       gameState.setActivePlayer(creatureFactory.createPlayer("Hero"));
     }
