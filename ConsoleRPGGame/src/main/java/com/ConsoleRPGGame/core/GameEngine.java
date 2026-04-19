@@ -5,71 +5,59 @@ import com.ConsoleRPGGame.domain.combat.CombatService;
 import com.ConsoleRPGGame.domain.creature.CreatureFactory;
 import com.ConsoleRPGGame.domain.creature.Enemy;
 import com.ConsoleRPGGame.domain.creature.Player;
+import com.ConsoleRPGGame.infrastructure.input.InputReader;
+import com.ConsoleRPGGame.infrastructure.output.ConsoleRenderer;
 import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
 @Component
 public class GameEngine {
-
+  private final InputReader input;
+  private final ConsoleRenderer renderer;
   private final CombatService combatService;
-  private final GameState gameState;
   private final CreatureFactory creatureFactory;
-  private final Scanner scanner = new Scanner(System.in);
+  private final GameState gameState;
 
-  public GameEngine(CombatService combatService, GameState gameState, CreatureFactory creatureFactory) {
+  public GameEngine(InputReader input, ConsoleRenderer renderer, CombatService combatService, CreatureFactory creatureFactory, GameState gameState) {
+    this.input = input;
+    this.renderer = renderer;
     this.combatService = combatService;
-    this.gameState = gameState;
     this.creatureFactory = creatureFactory;
+    this.gameState = gameState;
   }
 
   public void start() {
-
-    if (gameState.getActivePlayer() == null) {
-      gameState.setActivePlayer(creatureFactory.createPlayer("Hero"));
-    }
+    renderer.renderMessage("Welcome to the adventure!");
 
     while (!gameState.isGameOver()) {
-      System.out.println("\n--- MAIN MENU ---");
-      System.out.println("1 - Explore (Fight)");
-      System.out.println("2 - View Profile");
-      System.out.println("3 - Exit");
-      System.out.print("Your choice: ");
+      renderer.renderMenu();
+      String command = input.getCommand();
 
-      String input = scanner.nextLine();
-      processInput(input);
+
+      processCommand(command);
     }
   }
 
-  private void processInput(String input) {
-    switch (input) {
+
+  private void processCommand(String command) {
+    switch (command) {
       case "1" -> {
-
         Enemy monster = creatureFactory.createOrc();
-
-        System.out.println("You encountered a " + monster.getName() + "!");
+        renderer.renderMessage("You are meeting with" + monster.getName());
         combatService.startCombat(gameState.getActivePlayer(), monster);
       }
       case "2" -> {
-        showProfile();
+        renderer.renderProfile(gameState.getActivePlayer());
       }
       case "3" -> {
-        System.out.println("Saving and exiting... Goodbye!");
+        renderer.renderMessage("Ending the Game...");
         gameState.setGameOver(true);
       }
-      default -> System.out.println("Invalid option. Please press 1, 2, or 3.");
+      default -> renderer.renderMessage("Invalid command!");
     }
   }
-
-  private void showProfile() {
-    Player p = gameState.getActivePlayer();
-    System.out.println("\n*************************");
-    System.out.println("CHARACTER: " + p.getName());
-    System.out.println("HP: " + p.getHealthPoints());
-    System.out.println("STR: " + p.getStrength());
-    System.out.println("DEF: " + p.getDefense());
-    System.out.println("*************************");
-  }
 }
+
 
 
