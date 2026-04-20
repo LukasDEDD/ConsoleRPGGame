@@ -22,6 +22,14 @@ public class CombatService {
 
   public void executeAttack(Creature attacker, Creature defender) {
 
+    if (attacker.getHealthPoints() <= 0) {
+      return;
+    }
+
+    if (defender.getHealthPoints() <= 0) {
+      return;
+    }
+
     int damage = attacker.getAttackStrategy().calculateDamage(attacker, defender);
 
     int newHp = defender.getHealthPoints() - damage;
