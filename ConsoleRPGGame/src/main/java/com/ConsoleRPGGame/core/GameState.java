@@ -12,11 +12,8 @@ public class GameState {
   private boolean isGameOver = false;
   private String lastMessage;
 
-  public GameState(String lastMessage, boolean isGameOver, Creature currentEnemy, Player activePlayer) {
-    this.lastMessage = lastMessage;
-    this.isGameOver = isGameOver;
-    this.currentEnemy = currentEnemy;
-    this.activePlayer = activePlayer;
+  public GameState() {
+
   }
 
   public String getLastMessage() {
