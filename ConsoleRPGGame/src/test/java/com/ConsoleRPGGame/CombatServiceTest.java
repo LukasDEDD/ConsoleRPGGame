@@ -1,10 +1,9 @@
 package com.ConsoleRPGGame;
 
-
+import com.ConsoleRPGGame.application.CombatService;
 import com.ConsoleRPGGame.application.repository.EnemyRepository;
 import com.ConsoleRPGGame.application.repository.PlayerRepository;
 import com.ConsoleRPGGame.domain.combat.AttackStrategy;
-import com.ConsoleRPGGame.application.CombatService;
 import com.ConsoleRPGGame.domain.creature.Enemy;
 import com.ConsoleRPGGame.domain.creature.Player;
 import org.junit.jupiter.api.BeforeEach;
@@ -43,52 +42,51 @@ class CombatServiceTest {
     };
 
     player = new Player(
-      "Hero",         // name
-      100,            // healthPoints
-      100,            // maxHealthPoints
-      20,             // strength
-      5,              // defense
-      testStrategy,           // attackStrategy
-      0,              // experience
-      1,              // level
-      new ArrayList<>(), // inventory (empty list)
-      0,              // gold
-      null,           // equippedWeapon
-      null            // equipItem
+      "Hero",
+      100,
+      100,
+      20,
+      5,
+      testStrategy,
+      0,
+      1,
+      new ArrayList<>(),
+      0,
+      null
     );
-    enemy = new Enemy("Small Goblin", 50,                 // healthPoints
-      50,                 // maxHealthPoints
-      15,                 // strength
-      5,                  // defense
-      testStrategy,               // attackStrategy
-      100                 // experience
-    );
-  };
 
+    enemy = new Enemy(
+      "Small Goblin",
+      50,
+      50,
+      15,
+      5,
+      testStrategy,
+      100
+    );
+  }
 
   @Test
-  @DisplayName("Attack should reduce enemy health correctly based on strength and defense")
+  @DisplayName("Player attack should reduce enemy HP correctly")
   void testAttackReducesHealth() {
 
     int startingHp = enemy.getHealthPoints();
 
-    combatService.executeAttack(player, enemy);
+    player.attack(enemy);
 
-    assertEquals(35, enemy.getHealthPoints(), "Goblin should have 12 HP left after attack");
+    assertEquals(startingHp - 15, enemy.getHealthPoints());
   }
 
   @Test
-  @DisplayName("Dead entities should not be able to deal damage")
+  @DisplayName("Dead entity cannot attack")
   void testDeadEntityCannotAttack() {
 
-
-
     enemy.setHealthPoints(0);
-    int playerHpBefore = player.getHealthPoints();
+    int hpBefore = player.getHealthPoints();
 
-    combatService.executeAttack(enemy, player);
+    enemy.attack(player);
 
-    assertEquals(playerHpBefore, player.getHealthPoints(), "Player should not take damage from a dead enemy");
+    assertEquals(hpBefore, player.getHealthPoints());
   }
 
   @Test
@@ -97,9 +95,8 @@ class CombatServiceTest {
 
     player.setStrength(999);
 
-    combatService.executeAttack(player, enemy);
+    player.attack(enemy);
 
-    assertTrue(enemy.getHealthPoints() >= 0, "Health points should not be negative");
     assertEquals(0, enemy.getHealthPoints());
   }
 }

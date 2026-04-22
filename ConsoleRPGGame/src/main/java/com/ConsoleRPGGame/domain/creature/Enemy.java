@@ -1,6 +1,5 @@
 package com.ConsoleRPGGame.domain.creature;
 
-
 import com.ConsoleRPGGame.domain.combat.AttackStrategy;
 import jakarta.persistence.*;
 
@@ -15,20 +14,26 @@ public class Enemy extends Creature {
   private int experience;
 
   public Enemy() {
-
   }
 
-  public Enemy(String name, int healthPoints, int maxHealthPoints, int strength, int defense, AttackStrategy attackStrategy, int experience) {
+  public Enemy(String name,
+               int healthPoints,
+               int maxHealthPoints,
+               int strength,
+               int defense,
+               AttackStrategy attackStrategy,
+               int experience) {
+
     super(name, healthPoints, maxHealthPoints, strength, defense, attackStrategy);
     this.experience = experience;
   }
 
+  // může používat attack() z Creature
+
+
+
   public Long getId() {
     return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
   }
 
   public int getExperience() {
@@ -39,4 +44,3 @@ public class Enemy extends Creature {
     this.experience = experience;
   }
 }
-

@@ -1,6 +1,5 @@
 package com.ConsoleRPGGame.application;
 
-
 import com.ConsoleRPGGame.application.repository.EnemyRepository;
 import com.ConsoleRPGGame.application.repository.PlayerRepository;
 import com.ConsoleRPGGame.domain.creature.Creature;
@@ -11,71 +10,44 @@ import org.springframework.stereotype.Service;
 public class CombatService {
 
   private final PlayerRepository playerRepository;
-
   private final EnemyRepository enemyRepository;
 
-  public CombatService(PlayerRepository playerRepository, EnemyRepository enemyRepository) {
+  public CombatService(PlayerRepository playerRepository,
+                       EnemyRepository enemyRepository) {
     this.playerRepository = playerRepository;
     this.enemyRepository = enemyRepository;
-
   }
 
-  public void executeAttack(Creature attacker, Creature defender) {
-
-    if (attacker.getHealthPoints() <= 0) {
-      return;
-    }
-
-    if (defender.getHealthPoints() <= 0) {
-      return;
-    }
-
-    int damage = attacker.getAttackStrategy().calculateDamage(attacker, defender);
-
-    int newHp = defender.getHealthPoints() - damage;
-    defender.setHealthPoints(Math.max(0, newHp));
-
-    System.out.println(attacker.getName() + "dealt" + damage + "character damage" + defender.getName());
-  }
-
-  public  void startCombat(Player player, Creature creature) {
+  public void startCombat(Player player, Creature creature) {
 
     System.out.println("The duel begins.");
 
-    while ( player.getHealthPoints()>0 && creature.getHealthPoints()>0 ) {
+    while (player.isAlive() && creature.isAlive()) {
 
-      executeAttack(player, creature);
+      player.attack(creature);
 
-      if ( creature.getHealthPoints() > 0) {
-        executeAttack(creature, player);
+      if (creature.isAlive()) {
+        creature.attack(player);
       }
 
       printStatus(player, creature);
-
-      }
-      finalizeCombat(player, creature);
-
     }
+
+    finalizeCombat(player, creature);
+  }
+
   private void printStatus(Player player, Creature creature) {
     System.out.println("Status -> " + player.getName() + ": " + player.getHealthPoints() + " HP | "
       + creature.getName() + ": " + creature.getHealthPoints() + " HP");
   }
 
   private void finalizeCombat(Player player, Creature creature) {
-    if (player.getHealthPoints() <= 0) {
+    if (!player.isAlive()) {
       System.out.println("GAME OVER: " + player.getName() + " has fallen.");
     } else {
       System.out.println("VICTORY: " + creature.getName() + " has been defeated!");
-
     }
 
     playerRepository.save(player);
   }
-  }
-
-
-
-
-
-
-
+}

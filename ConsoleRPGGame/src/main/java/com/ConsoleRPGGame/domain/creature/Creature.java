@@ -1,29 +1,26 @@
 package com.ConsoleRPGGame.domain.creature;
 
 import com.ConsoleRPGGame.domain.combat.AttackStrategy;
-import jakarta.persistence.MappedSuperclass;
-import jakarta.persistence.Column;
-import jakarta.persistence.Transient;
 
-@MappedSuperclass
 public abstract class Creature {
 
-  @Column(nullable = false)
+  protected String name;
+  protected int healthPoints;
+  protected int maxHealthPoints;
+  protected int strength;
+  protected int defense;
 
-  private String name;
+  protected AttackStrategy attackStrategy;
 
-  private int healthPoints;
-  private int maxHealthPoints;
-  private int strength;
-  private int defense;
-
-  @Transient
-  private AttackStrategy attackStrategy;
-
-  public Creature() {
+  protected Creature() {
   }
 
-  public Creature(String name, int healthPoints, int maxHealthPoints, int strength, int defense, AttackStrategy attackStrategy) {
+  protected Creature(String name,
+                     int healthPoints,
+                     int maxHealthPoints,
+                     int strength,
+                     int defense,
+                     AttackStrategy attackStrategy) {
     this.name = name;
     this.healthPoints = healthPoints;
     this.maxHealthPoints = maxHealthPoints;
@@ -32,12 +29,25 @@ public abstract class Creature {
     this.attackStrategy = attackStrategy;
   }
 
-  public String getName() {
-    return name;
+  //  DDD logika společná pro všechny bytosti
+
+  public void attack(Creature target) {
+    int damage = this.attackStrategy.calculateDamage(this, target);
+    target.takeDamage(damage);
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public void takeDamage(int dmg) {
+    this.healthPoints = Math.max(0, this.healthPoints - dmg);
+  }
+
+  public boolean isAlive() {
+    return this.healthPoints > 0;
+  }
+
+
+
+  public String getName() {
+    return name;
   }
 
   public int getHealthPoints() {
@@ -45,7 +55,7 @@ public abstract class Creature {
   }
 
   public void setHealthPoints(int healthPoints) {
-    this.healthPoints = Math.max(0, healthPoints);
+    this.healthPoints = healthPoints;
   }
 
   public int getMaxHealthPoints() {
@@ -68,16 +78,15 @@ public abstract class Creature {
     return defense;
   }
 
+  public void setDefense(int defense) {
+    this.defense = defense;
+  }
+
   public AttackStrategy getAttackStrategy() {
     return attackStrategy;
   }
 
   public void setAttackStrategy(AttackStrategy attackStrategy) {
     this.attackStrategy = attackStrategy;
-  }
-
-  public void setDefense(int defense) {
-    this.defense = defense;
-
   }
 }
