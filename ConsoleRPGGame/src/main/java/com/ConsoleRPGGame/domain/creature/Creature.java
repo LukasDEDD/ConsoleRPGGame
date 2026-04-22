@@ -1,26 +1,32 @@
 package com.ConsoleRPGGame.domain.creature;
 
 import com.ConsoleRPGGame.domain.combat.AttackStrategy;
+import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.Transient;
 
+@MappedSuperclass
 public abstract class Creature {
 
-  protected String name;
-  protected int healthPoints;
-  protected int maxHealthPoints;
-  protected int strength;
-  protected int defense;
+  private String name;
+  private int healthPoints;
+  private int maxHealthPoints;
+  private int strength;
+  private int defense;
 
-  protected AttackStrategy attackStrategy;
+  @Transient
+  private AttackStrategy attackStrategy;
 
-  protected Creature() {
+
+  public Creature() {
   }
 
-  protected Creature(String name,
-                     int healthPoints,
-                     int maxHealthPoints,
-                     int strength,
-                     int defense,
-                     AttackStrategy attackStrategy) {
+  public Creature(String name,
+                  int healthPoints,
+                  int maxHealthPoints,
+                  int strength,
+                  int defense,
+                  AttackStrategy attackStrategy) {
+
     this.name = name;
     this.healthPoints = healthPoints;
     this.maxHealthPoints = maxHealthPoints;
@@ -29,22 +35,30 @@ public abstract class Creature {
     this.attackStrategy = attackStrategy;
   }
 
-  //  DDD logika společná pro všechny bytosti
-
-  public void attack(Creature target) {
-    int damage = this.attackStrategy.calculateDamage(this, target);
-    target.takeDamage(damage);
-  }
-
-  public void takeDamage(int dmg) {
-    this.healthPoints = Math.max(0, this.healthPoints - dmg);
-  }
+  // ---------- DDD Logika ----------
 
   public boolean isAlive() {
     return this.healthPoints > 0;
   }
 
+  public void attack(Creature target) {
+    if (!this.isAlive()) {
+      return; // mrtvý neútočí
+    }
 
+    int damage = attackStrategy.calculateDamage(this, target);
+    target.takeDamage(damage);
+  }
+
+  public void takeDamage(int amount) {
+    if (!this.isAlive()) {
+      return; // mrtvý už nedostává damage
+    }
+
+    this.healthPoints = Math.max(0, this.healthPoints - amount);
+  }
+
+  // ---------- Gettery / Settery ----------
 
   public String getName() {
     return name;
@@ -55,15 +69,11 @@ public abstract class Creature {
   }
 
   public void setHealthPoints(int healthPoints) {
-    this.healthPoints = healthPoints;
+    this.healthPoints = Math.max(0, healthPoints);
   }
 
   public int getMaxHealthPoints() {
     return maxHealthPoints;
-  }
-
-  public void setMaxHealthPoints(int maxHealthPoints) {
-    this.maxHealthPoints = maxHealthPoints;
   }
 
   public int getStrength() {
@@ -76,10 +86,6 @@ public abstract class Creature {
 
   public int getDefense() {
     return defense;
-  }
-
-  public void setDefense(int defense) {
-    this.defense = defense;
   }
 
   public AttackStrategy getAttackStrategy() {
