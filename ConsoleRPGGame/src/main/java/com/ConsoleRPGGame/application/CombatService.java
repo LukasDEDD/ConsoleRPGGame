@@ -1,8 +1,8 @@
-package com.ConsoleRPGGame.domain.combat;
+package com.ConsoleRPGGame.application;
 
 
-import com.ConsoleRPGGame.Repositories.EnemyRepository;
-import com.ConsoleRPGGame.Repositories.PlayerRepository;
+import com.ConsoleRPGGame.application.repository.EnemyRepository;
+import com.ConsoleRPGGame.application.repository.PlayerRepository;
 import com.ConsoleRPGGame.domain.creature.Creature;
 import com.ConsoleRPGGame.domain.creature.Player;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package com.ConsoleRPGGame.Repositories;
+package com.ConsoleRPGGame.application.repository;
 
 
 import com.ConsoleRPGGame.domain.item.Item;

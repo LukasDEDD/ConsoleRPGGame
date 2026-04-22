@@ -1,11 +1,10 @@
-package com.ConsoleRPGGame.domain.item;
+package com.ConsoleRPGGame.application;
 
-import com.ConsoleRPGGame.Repositories.ItemRepository;
-import com.ConsoleRPGGame.Repositories.PlayerRepository;
+import com.ConsoleRPGGame.application.repository.ItemRepository;
+import com.ConsoleRPGGame.application.repository.PlayerRepository;
 import com.ConsoleRPGGame.domain.creature.Player;
+import com.ConsoleRPGGame.domain.item.Item;
 import org.springframework.stereotype.Service;
-
-import static com.ConsoleRPGGame.domain.item.ItemType.*;
 
 @Service
 public class InventoryService {

@@ -1,15 +1,12 @@
 package com.ConsoleRPGGame.core;
 
-import com.ConsoleRPGGame.domain.combat.CombatService;
+import com.ConsoleRPGGame.application.CombatService;
 
 import com.ConsoleRPGGame.domain.creature.CreatureFactory;
 import com.ConsoleRPGGame.domain.creature.Enemy;
-import com.ConsoleRPGGame.domain.creature.Player;
 import com.ConsoleRPGGame.infrastructure.input.InputReader;
 import com.ConsoleRPGGame.infrastructure.output.ConsoleRenderer;
 import org.springframework.stereotype.Component;
-
-import java.util.Scanner;
 
 @Component
 public class GameEngine {
