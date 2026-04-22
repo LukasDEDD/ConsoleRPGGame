@@ -1,33 +1,41 @@
- # Console RPG Game
-A Spring Boot–powered text RPG demonstrating clean architecture, domain‑driven design, and automated testing.
+# Console RPG Game
+
+A Spring Boot–powered text RPG demonstrating **clean architecture**, **pragmatic domain‑driven design**, and **automated testing**.
+
+---
 
 ## Features
-Turn‑based Combat: Implemented using the AttackStrategy pattern for flexible damage calculation.
 
-Clean Domain Model: Creatures, items, combat logic, and game engine separated into clear domain modules.
+- **Turn‑based Combat**  
+  Combat logic lives directly inside the domain model (`Player.attack()`, `Creature.takeDamage()`), using the `AttackStrategy` pattern for flexible damage calculation.
 
-Factory Pattern: Enemy creation handled by CreatureFactory.
+- **Pragmatic DDD Domain Model**  
+  Business logic is implemented inside domain entities (Player, Enemy, Creature).  
+  Application services only orchestrate loading and saving entities.
 
-Inventory System: Basic item model with ItemType and InventoryService.
+- **Inventory System**  
+  The player can equip weapons, use items, and manage inventory through domain methods.
 
-Console Rendering: Simple CLI output via ConsoleRenderer.
+- **Clean Architecture Layout**  
+  Clear separation of domain, application, infrastructure, and core game loop.
 
-Unit Testing: Comprehensive test suite using JUnit 5 and Mockito.
+- **Unit Testing**  
+  JUnit 5 + Mockito tests validate combat logic, HP boundaries, and domain behavior.
+
+---
 
 ## Tech Stack
-* Java 25
 
-* Spring Boot 3.5.13
+- Java 25
+- Spring Boot 3.5
+- Spring Data JPA (Hibernate)
+- H2 In‑Memory Database
+- Maven
 
-* Spring Data JPA (Hibernate)
-
-* H2 In‑Memory Database
-
-* Maven
-
+---
+````
 ##  Architecture Overview
 
-```
 src/main/java/com.ConsoleRPGGame
 │
 ├── core
@@ -37,7 +45,6 @@ src/main/java/com.ConsoleRPGGame
 ├── domain
 │   ├── combat
 │   │   ├── AttackStrategy
-│   │   ├── CombatService
 │   │   ├── MagicAttack
 │   │   └── MeleeAttack
 │   │
@@ -50,68 +57,77 @@ src/main/java/com.ConsoleRPGGame
 │   └── item
 │       ├── Item
 │       ├── ItemType
-│       └── InventoryService
+│       └── (inventory logic handled in Player)
+│
+├── application
+│   ├── CombatService
+│   ├── InventoryService
+│   └── repository
+│       ├── PlayerRepository
+│       ├── EnemyRepository
+│       └── ItemRepository
 │
 ├── infrastructure
 │   ├── config
-│   │   └── GameConfig
 │   ├── input
-│   │   └── InputReader
 │   ├── output
-│   │   └── ConsoleRenderer
-│   └── Repositories
+│   └── persistence
 │
 └── ConsoleRpgGameApplication
-``` 
-### This structure follows clean architecture principles:
+````
 
-* Domain contains pure game logic.
+### Why this is pragmatic DDD
 
-* Core manages the game loop and state.
+- The **domain layer contains all business logic** (combat, damage, inventory actions).
+- The **application layer orchestrates** domain behavior and repository access.
+- The **infrastructure layer** handles I/O, persistence, and configuration.
+- The **core layer** runs the game loop independently of Spring.
 
-* Infrastructure handles I/O, configuration, and persistence.
+---
 
-* Application bootstraps the Spring context.
+##  Combat System
 
-## Combat System
-### The combat engine ensures:
+The combat engine ensures:
 
-* Dead attackers cannot deal damage.
+- Dead attackers cannot deal damage
+- Dead defenders cannot receive damage
+- Damage is calculated via `AttackStrategy`
+- Health never drops below zero
 
-* Dead defenders cannot receive damage.
+### Example domain logic
 
-* Damage is calculated through a pluggable AttackStrategy.
-
-* Health never drops below zero.
-
-### Example logic:
-
-### java
-
-if (attacker.getHealthPoints() <= 0) return;
-
-if (defender.getHealthPoints() <= 0) return;
-
-int damage = attacker.getAttackStrategy().calculateDamage(attacker, defender);
-defender.setHealthPoints(Math.max(0, defender.getHealthPoints() - damage));
-
+``` java
+public void attack(Creature target) {
+    int damage = attackStrategy.calculateDamage(this, target);
+    target.takeDamage(damage);
+}
+```
 ## Testing
-### Run all tests:
 
-* bash
-* mvn test
-* The test suite includes:
-* Combat logic validation
-* Dead‑entity attack prevention
-* Health boundary checks
-* Repository mocking with Mockito
+Run all tests:
 
-## Persistence
-### The game uses:
 
-* H2 in‑memory database for fast development
-* Spring Data JPA repositories for Player and Enemy
-* This allows future expansion into:
-* Saving game progress
-* Loading characters
-* Persistent world state
+The test suite includes:
+
+- Combat logic validation  
+- Dead‑entity attack prevention  
+- Health boundary checks  
+- Domain‑level behavior tests  
+- Mockito repository mocking  
+
+---
+
+##  Persistence
+
+The game uses:
+
+- H2 in‑memory database  
+- Spring Data JPA repositories  
+- Automatic schema generation  
+
+Prepared for future expansion:
+
+- Saving game progress  
+- Loading characters  
+- Persistent world state  
+
