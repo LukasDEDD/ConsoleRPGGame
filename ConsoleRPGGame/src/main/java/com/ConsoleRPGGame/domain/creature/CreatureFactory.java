@@ -1,6 +1,8 @@
 package com.ConsoleRPGGame.domain.creature;
 
 import com.ConsoleRPGGame.domain.combat.AttackStrategy;
+import com.ConsoleRPGGame.domain.creature.enemy.Enemy;
+import com.ConsoleRPGGame.domain.creature.player.Player;
 import com.ConsoleRPGGame.domain.item.Item;
 import org.springframework.stereotype.Component;
 

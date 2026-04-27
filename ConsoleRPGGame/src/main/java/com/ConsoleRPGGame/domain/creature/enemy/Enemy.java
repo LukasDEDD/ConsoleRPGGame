@@ -1,6 +1,7 @@
-package com.ConsoleRPGGame.domain.creature;
+package com.ConsoleRPGGame.domain.creature.enemy;
 
 import com.ConsoleRPGGame.domain.combat.AttackStrategy;
+import com.ConsoleRPGGame.domain.creature.Creature;
 import jakarta.persistence.*;
 
 @Entity

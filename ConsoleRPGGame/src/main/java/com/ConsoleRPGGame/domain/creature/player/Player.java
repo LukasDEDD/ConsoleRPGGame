@@ -1,6 +1,7 @@
-package com.ConsoleRPGGame.domain.creature;
+package com.ConsoleRPGGame.domain.creature.player;
 
 import com.ConsoleRPGGame.domain.combat.AttackStrategy;
+import com.ConsoleRPGGame.domain.creature.Creature;
 import com.ConsoleRPGGame.domain.item.Item;
 import com.ConsoleRPGGame.domain.item.ItemType;
 import jakarta.persistence.*;

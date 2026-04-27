@@ -1,9 +1,7 @@
-package com.ConsoleRPGGame.core;
-
-import com.ConsoleRPGGame.application.CombatService;
+package com.ConsoleRPGGame.application;
 
 import com.ConsoleRPGGame.domain.creature.CreatureFactory;
-import com.ConsoleRPGGame.domain.creature.Enemy;
+import com.ConsoleRPGGame.domain.creature.enemy.Enemy;
 import com.ConsoleRPGGame.infrastructure.input.InputReader;
 import com.ConsoleRPGGame.infrastructure.output.ConsoleRenderer;
 import org.springframework.stereotype.Component;

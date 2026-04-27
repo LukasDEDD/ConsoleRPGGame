@@ -1,8 +1,8 @@
 package com.ConsoleRPGGame.application;
 
-import com.ConsoleRPGGame.application.repository.ItemRepository;
-import com.ConsoleRPGGame.application.repository.PlayerRepository;
-import com.ConsoleRPGGame.domain.creature.Player;
+import com.ConsoleRPGGame.domain.item.ItemRepository;
+import com.ConsoleRPGGame.domain.creature.player.PlayerRepository;
+import com.ConsoleRPGGame.domain.creature.player.Player;
 import com.ConsoleRPGGame.domain.item.Item;
 import org.springframework.stereotype.Service;
 

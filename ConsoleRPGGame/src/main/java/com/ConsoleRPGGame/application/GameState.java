@@ -1,7 +1,7 @@
-package com.ConsoleRPGGame.core;
+package com.ConsoleRPGGame.application;
 
 import com.ConsoleRPGGame.domain.creature.Creature;
-import com.ConsoleRPGGame.domain.creature.Player;
+import com.ConsoleRPGGame.domain.creature.player.Player;
 import org.springframework.stereotype.Component;
 
 
