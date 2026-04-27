@@ -1,6 +1,6 @@
 package com.ConsoleRPGGame.infrastructure.output;
 
-import com.ConsoleRPGGame.domain.creature.Player;
+import com.ConsoleRPGGame.domain.creature.player.Player;
 import org.springframework.stereotype.Component;
 
 @Component

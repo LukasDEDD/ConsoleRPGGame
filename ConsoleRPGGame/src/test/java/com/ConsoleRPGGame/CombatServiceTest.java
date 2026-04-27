@@ -1,11 +1,11 @@
 package com.ConsoleRPGGame;
 
 import com.ConsoleRPGGame.application.CombatService;
-import com.ConsoleRPGGame.application.repository.EnemyRepository;
-import com.ConsoleRPGGame.application.repository.PlayerRepository;
+import com.ConsoleRPGGame.domain.creature.enemy.EnemyRepository;
+import com.ConsoleRPGGame.domain.creature.player.PlayerRepository;
 import com.ConsoleRPGGame.domain.combat.AttackStrategy;
-import com.ConsoleRPGGame.domain.creature.Enemy;
-import com.ConsoleRPGGame.domain.creature.Player;
+import com.ConsoleRPGGame.domain.creature.enemy.Enemy;
+import com.ConsoleRPGGame.domain.creature.player.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

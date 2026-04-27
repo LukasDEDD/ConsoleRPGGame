@@ -1,6 +1,6 @@
 package com.ConsoleRPGGame;
 
-import com.ConsoleRPGGame.core.GameEngine;
+import com.ConsoleRPGGame.application.GameEngine;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

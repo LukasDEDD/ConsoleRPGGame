@@ -1,7 +1,6 @@
-package com.ConsoleRPGGame.application.repository;
+package com.ConsoleRPGGame.domain.creature.player;
 
 
-import com.ConsoleRPGGame.domain.creature.Player;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
