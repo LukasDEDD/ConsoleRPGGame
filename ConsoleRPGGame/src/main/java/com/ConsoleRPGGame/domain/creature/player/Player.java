@@ -52,7 +52,7 @@ public class Player extends Creature {
     this.equippedWeapon = equippedWeapon;
   }
 
-  // ---------- DDD doménová logika ----------
+
 
   @Override
   public void attack(Creature target) {
