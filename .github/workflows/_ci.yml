@@ -10,6 +10,10 @@ on:
       - master
       - main
 
+defaults:
+    run:
+      working-directory: ./ConsoleRPGGame
+
 jobs:
   build-test:
     runs-on: ubuntu-latest
