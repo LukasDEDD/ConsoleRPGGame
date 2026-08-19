@@ -36,7 +36,7 @@ A Spring Boot–powered text RPG demonstrating **clean architecture**, **pragmat
 ````
 ##  Architecture Overview
 
-src/main/java/com.ConsoleRPGGame
+src/main/java/com.consoleRPGGame
 │
 ├── core
 │   ├── GameEngine
