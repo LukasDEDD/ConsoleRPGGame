@@ -4,9 +4,12 @@ import com.consoleRPGGame.domain.creature.CreatureFactory;
 import com.consoleRPGGame.domain.creature.enemy.Enemy;
 import com.consoleRPGGame.infrastructure.input.InputReader;
 import com.consoleRPGGame.infrastructure.output.ConsoleRenderer;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 @Component
+@Profile("!test")
+
 public class GameEngine {
   private final InputReader input;
   private final ConsoleRenderer renderer;
