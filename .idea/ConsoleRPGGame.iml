@@ -6,4 +6,11 @@
       <sourceFolder url="file://$MODULE_DIR$/ConsoleRPGGame/src/test" isTestSource="true" />
     </content>
   </component>
+  <component name="FacetManager">
+    <facet type="azure" name="Azure">
+      <configuration>
+        <option name="dotAzurePath" value="C:\Users\lukas\OneDrive\IT\Java\ConsoleRPGGame\ConsoleRPGGame\.azure" />
+      </configuration>
+    </facet>
+  </component>
 </module>
