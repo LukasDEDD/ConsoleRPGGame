@@ -17,7 +17,7 @@ jobs:
           distribution: 'temurin'
 
       - name: Build JAR with Maven
-        working-directory: ./consoleRPGGame
+        working-directory: ./ConsoleRPGGame
         run: mvn clean package -DskipTests
 
       - name: Log in to Azure Container Registry
@@ -28,7 +28,7 @@ jobs:
           password: ${{ secrets.REGISTRY_PASSWORD }}
 
       - name: Build and Push Docker Image
-        working-directory: ./consoleRPGGame
+        working-directory: ./ConsoleRPGGame
         run: |
           docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/consoleapp:latest .
           docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/consoleapp:latest
