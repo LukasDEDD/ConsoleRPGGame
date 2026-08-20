@@ -2,6 +2,7 @@ package com.consoleRPGGame.infrastructure.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 import java.util.Scanner;
 
@@ -9,6 +10,8 @@ import java.util.Scanner;
 public class GameConfig {
 
   @Bean
+  @Profile("!test")
+
   public Scanner scanner() {
     return new Scanner(System.in);
   }
